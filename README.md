@@ -41,8 +41,8 @@ function App() {
 
   const addCustomer = (e) => {
     e.preventDefault();
-    const totalGuests = customers.reduce((acc, curr) => acc + curr.guestCount, 0) + guestCount;
-    if (totalGuests > totalCapacity) {
+    const seatsLeft = totalCapacity - customers.reduce((acc, curr) => acc + (curr.status !== 'Checked Out' ? curr.guestCount : 0), 0);
+    if (guestCount > seatsLeft) {
       alert('No seats left!');
       return;
     }
@@ -129,6 +129,7 @@ function App() {
 }
 
 export default App;
+
 
 App.css:
 body {
